@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Site web du jeux - l'Epopee Galactique">
+    <meta name="keywords" content="Epopee Galactique, jeux, jeux en ligne">
+    <meta name="author" content="Christopher Mueller">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0a23">
+    <meta name="copyright" content="Epopee Galactique">
+    <meta name="application-name" content="Epopee Galactique">
+    <link rel="shortcut icon" href="asset/images/favicon.ico" type="image/x-icon">
+    <title>Epopee Galactique - Précommande</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400..900&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400..900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400..900&display=swap"></noscript>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+<body data-page="precommande">
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end fixed-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="index.html"><img src="asset/images/logo.svg" alt="Logo-Epopee Galactique" width="50" height="50"></a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                    <div class="navbar-nav justify-content-end">
+                      <a class="nav-link" aria-current="page" aria-label="Retour au Site" href="index.html">Retour au Site</a>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+        </header>
+        <!-- Scroll top -->
+    <button type="button" class="btn btn-primary position-fixed bottom-0 end-0 m-4" id="btnScrollTop" aria-label="Remonter en haut">
+        <i class="bi bi-rocket"></i>
+    </button>
+    <!-- Son (muet/son actif) -->
+    <button type="button" class="btn btn-secondary position-fixed bottom-0 start-0 m-4" id="btnMuteToggle" aria-label="Activer ou désactiver le son">
+        <i class="bi bi-volume-up-fill"></i>
+    </button>
+    <main>
+        <div class="container-fluid px-3 px-md-5">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6 text-center">
+                    <h1 class="display-4 mb-4 text-center text-wrap">Précommandez<br>"Épopée Galactique"</h1>
+                    <p class="lead mb-4 text-center text-wrap">Offrez-nous votre argent... <br>heuuu... <br>Précommandez maintenant et recevez vos cookies galactiques 🍪🪐</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <img id="imgCookies" src="asset/images/cookies.webp" alt="Boite de Cookies Galactiques" class="img-fluid mx-auto d-block" loading="lazy">
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <form id="precommandeForm" class="border p-4 rounded bg-dark text-light rocket-form">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nom de l'explorateur intergalactique</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Adresse galactique (email)</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="card" class="form-label">Données bancaires (promis, on en prendra soin 🤑)</label>
+                            <input type="text" class="form-control" id="card" placeholder="0000 1234 5678 9000" required>
+                            <small class="text-muted">Elles seront utilisées à bon escient... faites-nous confiance.😁</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100" aria-label="Précommander et recevez des cookies galactiques">
+                            🚀 Précommander et recevez des cookies galactiques
+                        </button>
+                    </form>
+                    <div id="feedbackMessage" class="feedback-popup d-none text-center text-white mt-4" aria-hidden="true">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3>Merci pour vos informations... 🤑</h3>
+                                    <p>On vous laisse avec vos Cookies Galactiques !</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class=" text-white">
+        <div class="container-fluid px-3 px-md-5">
+            <div class="row">
+                <div class="col-12 text-center py-3">
+                    <p class="mb-2">© 2025 Epopee Galactique. Tous droits réservés.</p>
+                    <div class="social-icons">
+                      <i class="bi bi-twitter mx-2 p-2" aria-hidden="true"></i>
+                      <i class="bi bi-facebook mx-2 p-2" aria-hidden="true"></i>
+                      <i class="bi bi-instagram mx-2 p-2" aria-hidden="true"></i>
+                      <i class="bi bi-youtube mx-2 p-2" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Son de confirmation -->
+    <audio id="voiceConfirm">
+        <source src="asset/sounds/confirmation-voix.mp3" type="audio/mpeg">
+    </audio>
+    <script defer>
+        document.getElementById('precommandeForm').addEventListener('submit', function(e) {
+          e.preventDefault(); // Empêche l'envoi immédiat
+          const form = this;
+      
+          // Animation de décollage
+          form.classList.add('rocket-launch');
+      
+          // Lecture du son vocal
+          const voice = document.getElementById("voiceConfirm");
+          voice.volume = 1;
+          voice.play().catch(error => {
+            console.warn("Lecture audio bloquée : ", error);
+          });
+      
+          // Affichage du message en pop-up après animation
+          setTimeout(() => {
+            const feedback = document.getElementById('feedbackMessage');
+            feedback.classList.remove('d-none');
+            feedback.style.opacity = '0';
+            feedback.style.transition = 'opacity 0.5s ease-in-out';
+            
+            // Animation d'apparition
+            setTimeout(() => {
+              feedback.style.opacity = '1';
+            }, 10);
+
+            // Masque automatique après 3 secondes
+            setTimeout(() => {
+              feedback.style.opacity = '0';
+              setTimeout(() => {
+                feedback.classList.add('d-none');
+                feedback.style.opacity = '';
+              }, 500); // Attendre la fin de l'animation de disparition
+            }, 4000);
+          }, 1000); // temps de lancement de la fusée
+        });
+      </script>
+
+    <script defer>
+    const btnScrollTop = document.getElementById("btnScrollTop");
+    const scrollSound = document.getElementById("scrollSound");
+
+    // Afficher le bouton après 300px de scroll
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            btnScrollTop.classList.remove("d-none");
+        } else {
+            btnScrollTop.classList.add("d-none");
+        }
+    });
+
+    // Scroll lent avec arrêt à chaque étape
+    document.getElementById("btnScrollTop").addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const btnMute = document.getElementById("btnMuteToggle");
+    let muted = false;
+
+    btnMute.addEventListener("click", () => {
+        muted = !muted;
+        document.querySelectorAll("video, audio").forEach(media => {
+            media.muted = muted;
+        });
+        btnMute.innerHTML = muted ? "<i class='bi bi-volume-mute-fill'></i>" : "<i class='bi bi-volume-up-fill'></i>";
+        btnMute.setAttribute("aria-label", muted ? "Son désactivé" : "Son activé");
+    });
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Musique de fond -->
+    <audio id="backgroundMusic" loop>
+        <source src="asset/sounds/sound_background.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'élément audio.
+    </audio>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+            const music = document.getElementById('backgroundMusic');
+            const muteButton = document.getElementById('btnMuteToggle');
+            
+            // Démarrer la musique en boucle avec un volume réduit (30%)
+            music.loop = true;
+            music.volume = 0.15; // Volume à 30% (0.3 sur une échelle de 0 à 1)
+            
+            // Gestion du bouton mute
+            muteButton.addEventListener('click', function() {
+                if (music.paused) {
+                    music.play();
+                    this.innerHTML = '<i class="bi bi-volume-up-fill"></i>';
+                } else {
+                    music.pause();
+                    this.innerHTML = '<i class="bi bi-volume-mute-fill"></i>';
+                }
+            });
+            
+            // Pour les navigateurs qui bloquent la lecture automatique
+            document.body.addEventListener('click', function initAudio() {
+                if (music.paused) {
+                    music.play().catch(e => console.log("La lecture automatique a été bloquée"));
+                }
+                document.body.removeEventListener('click', initAudio);
+            });
+        });
+    </script>
+</body>
+</html>

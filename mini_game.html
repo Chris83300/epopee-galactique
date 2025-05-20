@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Site web du jeux - l'Epopee Galactique">
+    <meta name="keywords" content="Epopee Galactique, jeux, jeux en ligne">
+    <meta name="author" content="Christopher Mueller">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0a23">
+    <meta name="copyright" content="Epopee Galactique">
+    <meta name="application-name" content="Epopee Galactique">
+    <link rel="shortcut icon" href="asset/images/favicon.ico" type="image/x-icon">
+    <title>Epopee Galactique - Mini Game</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400..900&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400..900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400..900&display=swap"></noscript>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+<body data-page="mini_game">
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end fixed-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="index.html"><img src="asset/images/logo.svg" alt="Logo-Epopee Galactique" width="50" height="50"></a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                    <div class="navbar-nav justify-content-end">
+                      <a class="nav-link" aria-current="page" aria-label="Retour au Site" href="index.html">Retour au Site</a>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+        </header>
+        <!-- Scroll top -->
+    <button type="button" class="btn btn-primary position-fixed bottom-0 end-0 m-4" id="btnScrollTop" aria-label="Remonter en haut">
+        <i class="bi bi-rocket"></i>
+    </button>
+    <!-- Son (muet/son actif) -->
+    <button type="button" class="btn btn-secondary position-fixed bottom-0 start-0 m-4" id="btnMuteToggle" aria-label="Activer ou désactiver le son">
+        <i class="bi bi-volume-up-fill"></i>
+    </button>
+    <main>
+        <div class="game-container text-center">
+            <h1>🍪 Cookies Galactiques</h1>
+            <br><p>Précommandez "Épopée Galactique" <br>et <br>recevez autants de cookies galactiques que vous pouvez collecter !🍪🪐</p>
+            <br><a href="precommande.html" class="btn btn-custom">🚀 Précommander</a>
+            <br><p>Score : <span id="score">0</span></p>
+            <img src="asset/images/cookie.png" alt="Cookie galactique" id="cookie" class="img-fluid">
+            <audio id="clickSound" src="asset/sounds/laser-btn-Pr.mp3" preload="auto"></audio>
+            <audio id="cookieWarningSound" preload="auto">
+                <source src="asset/sounds/warning_cookie.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </main>
+    <div id="feedbackPopup" class="feedback-popup"></div>
+    <footer>
+        <div class="container">
+            <p class="text-center text-white p-1"> 2025 Epopee Galactique. Tous droits réservés.</p>
+            <div class="row">
+                <div class="col-12 text-center d-flex justify-content-center">
+                    <i class="bi bi-twitter mx-2 p-2" aria-hidden="true"></i>
+                    <i class="bi bi-facebook mx-2 p-2" aria-hidden="true"></i>
+                    <i class="bi bi-instagram mx-2 p-2" aria-hidden="true"></i>
+                    <i class="bi bi-youtube mx-2 p-2" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- mini game -->
+    <!-- Sons vocaux -->
+    <audio id="sound30" src="asset/sounds/msg_30.mp3"></audio>
+    <audio id="sound50" src="asset/sounds/msg_50.mp3"></audio>
+    <audio id="sound120" src="asset/sounds/msg_120.mp3"></audio>
+    <audio id="sound200" src="asset/sounds/msg_200.mp3"></audio>
+    <script>
+        let score = 0;
+        const scoreDisplay = document.getElementById('score');
+        const cookie = document.getElementById('cookie');
+        const sound = document.getElementById('clickSound');
+        const feedbackPopup = document.getElementById('feedbackPopup');
+
+        // Pour éviter de répéter les sons
+        let triggeredMessages = new Set();
+
+        cookie.addEventListener('click', () => {
+        // Empêcher de jouer au-delà de 200
+        if (score >= 200) return;
+
+        score++;
+        scoreDisplay.textContent = score;
+
+        // Effet animation
+        cookie.classList.add('clicked');
+        setTimeout(() => cookie.classList.remove('clicked'), 150);
+
+        // Son de clic
+        sound.currentTime = 0;
+        sound.volume = 0.2;
+        sound.play();
+
+        // Texte flottant
+        const floating = document.createElement('div');
+        floating.textContent = '+1 ✨';
+        floating.classList.add('floating-text');
+        floating.style.left = (cookie.offsetLeft + 100) + 'px';
+        floating.style.top = (cookie.offsetTop + 50) + 'px';
+        document.body.appendChild(floating);
+        setTimeout(() => floating.remove(), 1000);
+
+        // Feedbacks aux paliers
+        if (score === 30 && !triggeredMessages.has(30)) {
+            displayPopup("🍪 Hé doucement... le stock vient juste de sortir du four spatial !");
+            playSound('sound30');
+            triggeredMessages.add(30);
+        } else if (score === 50 && !triggeredMessages.has(50)) {
+            displayPopup("🥵 Tu crois que c’est gratuit les cookies galactiques faits à la main ?!");
+            playSound('sound50');
+            triggeredMessages.add(50);
+        } else if (score === 120 && !triggeredMessages.has(120)) {
+            displayPopup("🍪 Gourmand ! Tu veux nous ruiner ou quoi ?! Tu sais combien ça coûte les cookies galactiques ?!");
+            playSound('sound120');
+            triggeredMessages.add(120);
+        } else if (score === 200 && !triggeredMessages.has(200)) {
+            displayPopup("💥 Les stocks sont à zéro ! Même les aliens n'ont plus de miettes. Merci hein.");
+            playSound('sound200');
+            triggeredMessages.add(200);
+            // Blocage visuel facultatif
+            cookie.style.pointerEvents = 'none';
+            cookie.style.opacity = '0.5';
+        }
+        });
+
+        // Fonction d'affichage du popup
+        function displayPopup(message) {
+            console.log('Affichage popup:', message);
+            feedbackPopup.textContent = message;
+            feedbackPopup.style.display = 'block';
+            feedbackPopup.style.opacity = '1';
+            feedbackPopup.style.transform = 'translate(-50%, -20px)';
+            
+            // Attente de la fin de l'animation
+            setTimeout(() => {
+                feedbackPopup.style.display = 'none';
+                feedbackPopup.style.opacity = '0';
+                feedbackPopup.style.transform = 'translate(-50%, 0)';
+            }, 6000);
+        }
+
+        // Fonction de lecture des sons
+        function playSound(id) {
+        const audio = document.getElementById(id);
+        if (audio) {
+            audio.volume = 1;
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log("Lecture bloquée :", e));
+        }
+        };
+    </script>
+
+    <!-- Musique de fond -->
+    <audio id="backgroundMusic" loop>
+        <source src="asset/sounds/sound_background.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'élément audio.
+    </audio>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+            const music = document.getElementById('backgroundMusic');
+            const muteButton = document.getElementById('btnMuteToggle');
+            
+            // Démarrer la musique en boucle avec un volume réduit (30%)
+            music.loop = true;
+            music.volume = 0.15; // Volume à 30% (0.3 sur une échelle de 0 à 1)
+            
+            // Gestion du bouton mute
+            muteButton.addEventListener('click', function() {
+                if (music.paused) {
+                    music.play();
+                    this.innerHTML = '<i class="bi bi-volume-up-fill"></i>';
+                } else {
+                    music.pause();
+                    this.innerHTML = '<i class="bi bi-volume-mute-fill"></i>';
+                }
+            });
+            
+            // Pour les navigateurs qui bloquent la lecture automatique
+            document.body.addEventListener('click', function initAudio() {
+                if (music.paused) {
+                    music.play().catch(e => console.log("La lecture automatique a été bloquée"));
+                }
+                document.body.removeEventListener('click', initAudio);
+            });
+        });
+    </script>
+</body>
+</html>

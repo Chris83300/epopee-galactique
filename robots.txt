@@ -1,0 +1,21 @@
+# robots.txt for Épopée Galactique
+
+# Autorise tous les robots à tout explorer sauf certains dossiers techniques
+User-agent: *
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /includes/
+Disallow: /private/
+Disallow: /tmp/
+Allow: /
+Allow: /index.html
+Allow: /download/
+Allow: /robots.txt
+Allow: /asset/
+Allow: /css/ 
+Allow: /video/ 
+Allow: /sounds/ 
+Allow: /images/  
+Allow: /favicon.ico
+
+Sitemap: https://www.epopee-galactique.com/sitemap.xml
